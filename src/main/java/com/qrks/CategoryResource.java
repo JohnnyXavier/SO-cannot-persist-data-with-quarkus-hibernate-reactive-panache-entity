@@ -7,9 +7,9 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/category")
+@Produces(MediaType.APPLICATION_JSON)
 public class CategoryResource {
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public Uni<List<Category>> listAllCategories() {
     Category category = new Category();
     category.setName("name");
@@ -20,7 +20,7 @@ public class CategoryResource {
 
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public Uni<List<Category>> CreateCategory(final Category category) {
+  public Uni<List<Category>> createCategory(final Category category) {
     return Category.add(category)
         .replaceWith(Category.findAll().list());
   }
